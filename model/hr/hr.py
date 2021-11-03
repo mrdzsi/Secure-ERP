@@ -68,14 +68,43 @@ def add_employee(id, name, bday, department, security_lvl):
 def get_oldest_youngest():
     table = get_table()
     youngest = 0
+    youngest_month = 0
+    youngest_day = 0
     oldest = 10000
+    oldest_month = 12
+    oldest_day = 31
+
     for row in table:
-        if int(row[2]) > youngest:
+        birth_date = [str(row[2]).split("-")]
+        year_of_birth = birth_date[0]
+        month_of_birth = birth_date[1]
+        day_of_birth = birth_date[2]
+
+        if int(year_of_birth) > youngest:
             youngest = row[2]
             youngest_name = row[1]
-        if int(row[2]) < oldest:
+        if int(year_of_birth) == youngest:
+            if int(month_of_birth) > youngest_month:
+                youngest = row[2]
+                youngest_name = row[1]
+        if int(year_of_birth) == youngest:
+            if int(month_of_birth) == youngest_month:
+                if int(day_of_birth) > youngest_day:
+                    youngest = row[2]
+                    youngest_name = row[1]
+
+        if int(year_of_birth) < oldest:
             oldest = row[2]
             oldest_name = row[1]
+        if int(year_of_birth) == oldest:
+            if int(month_of_birth) < oldest_month:
+                oldest = row[2]
+                oldest_name = row[1]
+        if int(year_of_birth) == oldest:
+            if int(month_of_birth) == oldest_month:
+                if int(day_of_birth) < oldest_day:
+                    oldest = row[2]
+                    oldest_name = row[1]
     return oldest, youngest, oldest_name, youngest_name
 
 
@@ -85,3 +114,31 @@ def get_average_age():
     for row in table:
         list_of_bdays.append(row[2])
     # gets a list of all birthdays, needs to calculate age from here
+
+
+def next_birthday_calc(current_date):
+    table = get_table()
+    date_as_list = [str(current_date).split("-")]
+    upcoming_bdays = []
+    for row in table:
+        birth_date = [str(row[2]).split("-")]
+        year_of_birth = birth_date[0]
+        month_of_birth = birth_date[1]
+        day_of_birth = birth_date[2]
+        # ez ideiglenesen visszaadja a kövi két héten belül lévő szülinapokat ha minimum ahónap 15-e van
+        # azért így csináltam mert ha csak 29 napos a hónap akkor is műküdik így
+        # jobb megoldáson még agyalnom kell
+        if int(date_as_list[2]) >= 15:
+            if int(day_of_birth) + 14 >= int(date_as_list[2]):
+                upcoming_bdays.append(row[1])
+
+    return upcoming_bdays
+
+
+def have_clearance(clearance_lvl):
+    table = get_table()
+    have_clearance = []
+    for row in table:
+        if int(row[4]) >= int(clearance_lvl):
+            have_clearance.append(row[1])
+    return have_clearance

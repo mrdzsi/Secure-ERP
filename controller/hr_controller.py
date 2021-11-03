@@ -28,21 +28,25 @@ def delete_employee():
 
 
 def get_oldest_and_youngest():
-    oldest, youngest, oldest_name, youngest_name = get_oldest_youngest()
+    oldest, youngest, oldest_name, youngest_name = hr.get_oldest_youngest()
     view.print_message(f"The youngest is {youngest_name} who was born in {youngest}")
     view.print_message(f"The oldest is {oldest_name} who was born in {oldest}")
 
 
 def get_average_age():
-    pass
+    view.print_error_message("Not implemented yet.")
 
 
 def next_birthdays():
-    view.print_error_message("Not implemented yet.")
+    current_date = view.get_input("Type in current date in YYYY-MM-DD format: ")
+    upcoming_bdays = next_birthday_calc(current_date)
+    view.print_message(f"upcoming bdays are: {upcoming_bdays}")
 
 
 def count_employees_with_clearance():
-    view.print_error_message("Not implemented yet.")
+    clearance_lvl = view.get_input("Minimum level security clearance: ")
+    have_clearance = hr.have_clearance(clearance_lvl)
+    view.print_message(f"These employees have minimum clearance level: {have_clearance}")
 
 
 def count_employees_per_department():
