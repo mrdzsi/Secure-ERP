@@ -1,29 +1,40 @@
+from hr import get_oldest_youngest
 from model.hr import hr
 from view import terminal as view
 
 
 def list_employees():
-    view.print_error_message("Not implemented yet.")
+    table = hr.get_table()
+    print(table)
 
 
 def add_employee():
-    view.print_error_message("Not implemented yet.")
+    id = view.get_input("id")
+    name = view.get_input("name")
+    bday = view.get_input("birthday")
+    department = view.get_input("department")
+    security_lvl = view.get_input("security clearance level")
 
 
 def update_employee():
-    view.print_error_message("Not implemented yet.")
+    employee_id = view.get_input("which employee to update?: ")
+    ask = view.get_input("What info needs to be updated? (1,2,3,4,5): ")
+    new_info = view.get_input("Type in new info: ")
 
 
 def delete_employee():
-    view.print_error_message("Not implemented yet.")
+    employee_id = view.get_input("which employee to delete?: ")
+    hr.delete_employee(employee_id)
 
 
 def get_oldest_and_youngest():
-    view.print_error_message("Not implemented yet.")
+    oldest, youngest, oldest_name, youngest_name = get_oldest_youngest()
+    view.print_message(f"The youngest is {youngest_name} who was born in {youngest}")
+    view.print_message(f"The oldest is {oldest_name} who was born in {oldest}")
 
 
 def get_average_age():
-    view.print_error_message("Not implemented yet.")
+    pass
 
 
 def next_birthdays():
