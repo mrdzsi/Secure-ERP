@@ -3,7 +3,8 @@ from view import terminal as view
 
 
 def list_customers():
-    view.print_table(crm.list_of_customers())
+    names = crm.list_of_customers()
+    view.print_table(names)
 
 
 def add_customer():
