@@ -35,9 +35,9 @@ def print_general_results(result, label):
     """
     if type(result) == int or float:
         print(f"{label}: {round(result, 2)}")
-    elif type(result) == list or tuple:
+    if type(result) == list or tuple:
         print(f"{label}:\n{'; '.join(result)}")
-    elif type(result) == dict:
+    if type(result) == dict:
         result="; ".join(f"{key}: {value}" for key,value in result.items())
         print(f"{label}:\n{result}")
 
