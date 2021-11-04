@@ -23,6 +23,14 @@ def list_employees():
     return employees
 
 
+def new_employee(name, bday, department, security_lvl):
+    id = util.generate_id()
+    data = [id, name, bday, department, security_lvl]
+    employees = data_manager.read_table_from_file(DATAFILE, ';')
+    employees.append(data)
+    data_manager.write_table_to_file(DATAFILE, employees, ';')
+
+
 def delete_employee(employee_id):
     table = get_table()
     for row in table:
@@ -54,12 +62,6 @@ def update_employee(employee_id, ask, new_info):
 #     table.append[id, name, bday, department, security_lvl]
 #     data_manager.write_table_to_file(DATAFILE, table)
 
-def new_employee(name, bday, department, security_lvl):
-    id = util.generate_id()
-    data = [id, name, bday, department, security_lvl]
-    employees = data_manager.read_table_from_file(DATAFILE, ';')
-    employees.append(data)
-    data_manager.write_table_to_file(DATAFILE, employees, ';')
 
 
 def get_oldest_youngest():
