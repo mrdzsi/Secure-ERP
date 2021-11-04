@@ -33,7 +33,7 @@ def delete_customer():
 
 def get_subscribed_emails():
     subscribed_costumer = crm.subscribed_customers()
-    view.print_message(subscribed_costumer)
+    view.print_general_results(subscribed_costumer, 'Subscribed email addresses')
 
 
 def run_operation(option):
