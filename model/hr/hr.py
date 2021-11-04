@@ -8,8 +8,11 @@ Data table structure:
     - clearance level (int): from 0 (lowest) to 7 (highest)
 """
 
+
+import datetime
 from os import remove
 from model import data_manager, util
+
 
 DATAFILE = "model/hr/hr.csv"
 HEADERS = ["Id", "Name", "Date of birth", "Department", "Clearance"]
@@ -110,29 +113,72 @@ def get_oldest_youngest():
 
 def get_average_age():
     table = get_table()
-    list_of_bdays = []
-    for row in table:
-        list_of_bdays.append(row[2])
-    # gets a list of all birthdays, needs to calculate age from here
-
-
-def next_birthday_calc(current_date):
-    table = get_table()
-    date_as_list = [str(current_date).split("-")]
-    upcoming_bdays = []
+    today = datetime.date.today
+    list_of_ages = []
     for row in table:
         birth_date = [str(row[2]).split("-")]
         year_of_birth = birth_date[0]
         month_of_birth = birth_date[1]
         day_of_birth = birth_date[2]
-        # ez ideiglenesen visszaadja a kövi két héten belül lévő szülinapokat ha minimum ahónap 15-e van
-        # azért így csináltam mert ha csak 29 napos a hónap akkor is műküdik így
-        # jobb megoldáson még agyalnom kell
-        if int(date_as_list[2]) >= 15:
-            if int(day_of_birth) + 14 >= int(date_as_list[2]):
-                upcoming_bdays.append(row[1])
+        birthday = datetime.date(int(year_of_birth), int(month_of_birth), int(day_of_birth))
+        age = today - birthday  # ez lehet hogy napokban adja vissza a kort, nem tudom, tesztnél kiderül
+        list_of_ages.append(age)
 
-    return upcoming_bdays
+    nr_of_cycles = 0
+    total = 0
+    for element in list_of_ages:
+        total += int(element)
+        nr_of_cycles += 1
+    average = total // nr_of_cycles  # ez lehet sima / is, nem tudom számít-e
+    return average
+
+    
+    # gets a list of all birthdays, needs to calculate age from here
+
+
+# def next_birthday_calc(current_date):
+#     table = get_table()
+#     date_as_list = [str(current_date).split("-")]
+#     upcoming_bdays = []
+#     for row in table:
+#         birth_date = [str(row[2]).split("-")]
+#         year_of_birth = birth_date[0]
+#         month_of_birth = birth_date[1]
+#         day_of_birth = birth_date[2]
+#         # ez ideiglenesen visszaadja a kövi két héten belül lévő szülinapokat ha minimum ahónap 15-e van
+#         # azért így csináltam mert ha csak 29 napos a hónap akkor is műküdik így
+#         # jobb megoldáson még agyalnom kell külső modul nélkül
+#         if int(date_as_list[2]) >= 15:
+#             if int(day_of_birth) + 14 >= int(date_as_list[2]):
+#                 upcoming_bdays.append(row[1])
+
+#     return upcoming_bdays
+
+
+def next_birthday_calc(current_date):
+    table = get_table()
+    today = datetime.date.today
+    has_bday = []
+    for row in table:
+        birth_date = [str(row[2]).split("-")]
+        year_of_birth = birth_date[0]
+        month_of_birth = birth_date[1]
+        day_of_birth = birth_date[2]
+        birth = datetime.date(int(year_of_birth), int(month_of_birth), int(day_of_birth))
+        if(
+            today.month == birth.month
+            and today.day >= birth.day
+            or today.month > birth.month
+        ):
+            nextBirthdayYear = today.year + 1
+        else:
+            nextBirthdayYear = today.year
+
+        nextBirthday = datetime.date(nextBirthdayYear, birth.month, birth.day)
+        diff = nextBirthday - today
+        if int(diff.days) <= 14:
+            has_bday.append(row[1])
+    return has_bday
 
 
 def have_clearance(clearance_lvl):
@@ -142,3 +188,14 @@ def have_clearance(clearance_lvl):
         if int(row[4]) >= int(clearance_lvl):
             have_clearance.append(row[1])
     return have_clearance
+
+
+def employees_per_department():
+    table = get_table()
+    departments = {}
+    for row in table:
+        if row[3] not in departments.keys():
+            departments.update({f'{row[3]}': 1})
+        else:
+            departments[f"{row[3]}"] += 1
+    return departments

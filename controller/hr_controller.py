@@ -1,4 +1,3 @@
-from hr import get_oldest_youngest
 from model.hr import hr
 from view import terminal as view
 
@@ -34,7 +33,8 @@ def get_oldest_and_youngest():
 
 
 def get_average_age():
-    view.print_error_message("Not implemented yet.")
+    average_age = hr.get_average_age()
+    view.print_message(f"Average age of employees is {average_age}")
 
 
 def next_birthdays():
@@ -50,7 +50,8 @@ def count_employees_with_clearance():
 
 
 def count_employees_per_department():
-    view.print_error_message("Not implemented yet.")
+    department_count = hr.employees_per_department()
+    view.print_message(f"Number of employees per department: {department_count}")
 
 
 def run_operation(option):
