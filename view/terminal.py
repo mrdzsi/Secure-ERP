@@ -33,11 +33,11 @@ def print_general_results(result, label):
     lists/tuples (like "@label: \n  @item1; @item2"), and dictionaries
     (like "@label \n  @key1: @value1; @key2: @value2")
     """
-    if type(result) == int or float:
-        print(f"{label}: {round(result, 2)}")
+    # if type(result) == int or float:
+    #     print(f"{label}: {round(result, 2)}")
     if type(result) == list or tuple:
         print(f"{label}:\n{'; '.join(result)}")
-    if type(result) == dict:
+    elif type(result) == dict:
         result="; ".join(f"{key}: {value}" for key,value in result.items())
         print(f"{label}:\n{result}")
 
