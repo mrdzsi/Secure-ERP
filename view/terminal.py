@@ -11,12 +11,11 @@ def print_menu(title, list_options):
         title (str): the title of the menu (first row)
         list_options (list): list of the menu options (listed starting from 1, 0th element goes to the end)
     """
-    print(title)
-    n = 1
-    for option in list_options:
-        print(f"({n})" + list_options[n])
-        n += 1
-    print("(0)" + list_options[0])
+    print(title +": ")
+    for index, option in enumerate(list_options[1:], start=1):
+        print(f"({index}) {option}")
+        if index == len(list_options)-1:
+            print(f"(0) {list_options[0]}")
 
 
 def print_message(message):
@@ -64,11 +63,13 @@ def print_table(table):
 
     first_line = "/"+("-"*column_width*column_numbers)+"\\"
     print(first_line)
+
     for row in table:
         line = "|" + "|".join(item.center(column_width) for item in row) + "|"
         fill = "|" + "|".join(("-"*column_width) for _ in row) + "|"
         print(line)
         print(fill)
+
     last_line = "\\" + ("-"*column_width*column_numbers) + "/"
     print(last_line)
 
