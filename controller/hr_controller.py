@@ -23,7 +23,7 @@ def update_employee():
 
 
 def delete_employee():
-    employee_id = view.get_input("Which employee to delete? (id): ")
+    employee_id = view.get_input("Which employee to delete? Please add employee ID: ")
     hr.delete_employee(employee_id)
 
 
