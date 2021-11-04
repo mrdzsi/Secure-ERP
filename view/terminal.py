@@ -55,12 +55,14 @@ def print_table(table):
     Args:
         table: list of lists - the table to print out
     """
-    column_numbers = len(max(table))  #  the first list in our table of list of lists
+    column_numbers = len(max(table))
     
-    longest_elem = None
+    
+    longest_elem = 0
     for row in table:
-        longest_elem = max(row)
-    column_width = len(longest_elem)
+        if len(max(row)) > longest_elem:
+            longest_elem = len(max(row))
+    column_width = longest_elem
 
     first_line = "/" + ("-"*(((column_width+1)*column_numbers)-1)) + "\\"
     print(first_line)
