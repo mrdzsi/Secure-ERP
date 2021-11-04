@@ -3,35 +3,52 @@ from view import terminal as view
 
 
 def list_transactions():
-    view.print_error_message("Not implemented yet.")
+    table = sales.list_transactions()
+    view.print_table(table)
 
 
 def add_transaction():
-    view.print_error_message("Not implemented yet.")
+    price_input = view.get_input("Please enter the price of the transaction")
+    product_input = view.get_input("Please enter the product of the transaction")
+    transaction_date = view.get_input("Please enter the date of the transaction")
+    sales.add_transaction(price_input, product_input, transaction_date)
 
 
 def update_transaction():
-    view.print_error_message("Not implemented yet.")
+    transaction_input_id = view.get_input("Please enter the ID of the transaction")
+    product = view.get_input("Please enter the new name of the product")
+    price = view.get_input("Please enter the new price of the transaction")
+    transaction_date = view.get_input("Please enter the new date of the transaction")
+    sales.update_transaction(transaction_input_id, product, price, transaction_date)
 
 
 def delete_transaction():
-    view.print_error_message("Not implemented yet.")
+    wanted_transaction_input_id = view.get_input("Please enter the ID of the transaction")
+    sales.delete_transaction(wanted_transaction_input_id)
 
 
 def get_biggest_revenue_transaction():
-    view.print_error_message("Not implemented yet.")
+    table = sales.get_biggest_revenue_transaction()
+    view.print_table(table)
 
 
 def get_biggest_revenue_product():
-    view.print_error_message("Not implemented yet.")
+    biggest_revenue = sales.get_biggest_revenue_product()
+    view.print_general_results(biggest_revenue, "Biggest revenue")
 
 
 def count_transactions_between():
-    view.print_error_message("Not implemented yet.")
+    date1 = view.get_input("Please enter the first date")
+    date2 = view.get_input("Please enter the second date")
+    count = sales.count_transactions_between(date1, date2)
+    view.print_general_results(count, f"Transactions between {date1} and {date2}")
 
 
 def sum_transactions_between():
-    view.print_error_message("Not implemented yet.")
+    date1 = view.get_input("Please enter the first date")
+    date2 = view.get_input("Please enter the second date")
+    sum = sales.sum_transactions_between(date1, date2)
+    view.print_general_results(sum, f"Sum of transactions between {date1} and {date2}")
 
 
 def run_operation(option):
