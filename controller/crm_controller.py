@@ -12,7 +12,7 @@ def add_customer():
     email = view.get_input("Please enter your email adress: ")
     subscription = view.get_input("Are you subscibed? 1 : yes, 0 :  no")
     crm.new_customer(name, email, subscription)
-   
+ 
 
 def update_customer():
     id = view.get_input("Please enter your id: ")

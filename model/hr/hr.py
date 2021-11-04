@@ -57,6 +57,8 @@ def delete_employee(employee_id, file=DATAFILE):
     data_manager.write_table_to_file(file, table)
 
 
+
+
 # def add_employee(id, name, bday, department, security_lvl):
 #     table = get_table()
 #     table.append[id, name, bday, department, security_lvl]
