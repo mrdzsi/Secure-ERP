@@ -1,4 +1,3 @@
-from hr import get_oldest_youngest
 from model.hr import hr
 from view import terminal as view
 
@@ -34,23 +33,25 @@ def get_oldest_and_youngest():
 
 
 def get_average_age():
-    view.print_error_message("Not implemented yet.")
+    average_age = hr.get_average_age()
+    view.print_message(f"Average age of employees is {average_age}")
 
 
 def next_birthdays():
     current_date = view.get_input("Type in current date in YYYY-MM-DD format: ")
-    upcoming_bdays = next_birthday_calc(current_date)
+    upcoming_bdays = hr.next_birthday_calc(current_date)
     view.print_message(f"upcoming bdays are: {upcoming_bdays}")
 
 
 def count_employees_with_clearance():
     clearance_lvl = view.get_input("Minimum level security clearance: ")
     have_clearance = hr.have_clearance(clearance_lvl)
-    view.print_message(f"These employees have minimum clearance level: {have_clearance}")
+    view.print_message(f"These employees have minimum clearance level: {have_clearance}")  # ez lehet print_table kéne legyen
 
 
 def count_employees_per_department():
-    view.print_error_message("Not implemented yet.")
+    department_count = hr.employees_per_department()
+    view.print_message(f"Number of employees per department: {department_count}")  # ez is lehet nem message hanem table lesz, teszt kedvéért maradhat message egyenlőre
 
 
 def run_operation(option):
