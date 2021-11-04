@@ -56,6 +56,6 @@ def subscribed_customers():
     subscribed_costumer = []
     costumers = data_manager.read_table_from_file(DATAFILE, ';')
     for costumer_index in range(len(costumers)):
-        if 1 == costumers[costumer_index][3]:
+        if '1' == costumers[costumer_index][3]:
             subscribed_costumer.append(costumers[costumer_index][2])
     return subscribed_costumer
