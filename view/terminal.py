@@ -56,13 +56,20 @@ def print_table(table):
     Args:
         table: list of lists - the table to print out
     """
-    print('/--------------------------------\\')
-    print("|   id   |   product  |   type   |")
+    column_numbers = len(table[0])  #  the first list in our table of list of lists
+    longest_elem = None
     for row in table:
-        print("|" + "\t" + str(row[0]) + "|" + "\t" + str(row[1]) + "\t" + "|" + "\t" + str(row[2]) + "\t" + "|")
-        if row != table[-2]:
-            print("|--------|------------|----------|")
-    print('\--------------------------------/')
+        longest_elem = max(row)
+    column_width = len(longest_elem)
+    first_line = "/"+("-"*column_width*column_numbers)+"\\"
+    print(first_line)
+    for row in table:
+        line = "|" + "|".join(str(item).center(column_width)) for item in row) + "|"
+        fill = "|" + "|".join(str("-"*column_width)) for item in row) + "|"
+        print(line)
+        print(fill)
+    last_line = "\\" + ("-"*column_width*column_numbers) + "/"
+    print(last_line)
 
 
 def get_input(label):
