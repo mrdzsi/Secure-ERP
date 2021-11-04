@@ -163,4 +163,4 @@ def employees_per_department():
             departments.update({f'{row[3]}': 1})
         else:
             departments[f"{row[3]}"] += 1
-    return departments  # itt dictionary-t ad vissza, ez nem lesz jó
+    return departments

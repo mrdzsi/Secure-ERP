@@ -13,12 +13,14 @@ def add_employee():
     bday = view.get_input("birthday (YYYY-MM-DD): ")
     department = view.get_input("department: ")
     security_lvl = view.get_input("security clearance level: ")
+    hr.add_employee(id, name, bday, department, security_lvl)
 
 
 def update_employee():
     employee_id = view.get_input("Which employee to update?: ")
     ask = view.get_input("What info needs to be updated? (1,2,3,4,5): ")
     new_info = view.get_input("Type in new info: ")
+    hr.update_employee(employee_id, ask, new_info)
 
 
 def delete_employee():
