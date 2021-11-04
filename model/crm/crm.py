@@ -17,8 +17,45 @@ def new_customer(name, email, subscription):
     customers = data_manager.read_table_from_file('crm.csv', ';')
     customers.append(data)
     data_manager.write_table_to_file('crm.csv', customers, ';')
-    return data
-  
+
+
+def list_of_customers():
+    customers = data_manager.read_table_from_file('crm.csv', ';')
+    return customers
+
+
+def change_customer_data(id, name, email, subscription):
+    is_update_sucessfull = False
+    costumers = data_manager.read_table_from_file('crm.csv', ';')
+    for costumer_index in range(len(costumers)):
+        if id == costumers[costumer_index][0]:
+            costumers[costumer_index][1] = name
+            costumers[costumer_index][2] = email
+            costumers[costumer_index][3] = subscription
+            is_update_sucessfull = True
+    data_manager.write_table_to_file('crm.csv', costumers, ';')
+    return is_update_sucessfull
+
+
+def remove_customer_data(id):
+    is_costumer = False
+    costumers = data_manager.read_table_from_file('crm.csv', ';')
+    for costumer_index in range(len(costumers)):
+        if id == costumers[costumer_index][0]:
+            costumers.remove(costumers[costumer_index])
+            is_costumer = True
+    data_manager.write_table_to_file('crm.csv', costumers, ';')
+    return is_costumer
+
+
+def subscribed_customers():
+    subscribed_costumer = []
+    costumers = data_manager.read_table_from_file('crm.csv', ';')
+    for costumer_index in range(len(costumers)):
+        if 1 == costumers[costumer_index][3]:
+            subscribed_costumer.append(costumers[costumer_index][2])
+    return subscribed_costumer
+
 
 DATAFILE = "model/crm/crm.csv"
 HEADERS = ["id", "name", "email", "subscribed"]

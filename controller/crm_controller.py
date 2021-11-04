@@ -7,22 +7,31 @@ def list_customers():
 
 
 def add_customer():
-     name = view.get_input("Please enter your name")
-     email = view.get_input("Please enter your email adress")
-     subscription = view.get_input("Are you subscibed? 1 : yes, 0 :  no")
-     crm.new_customer(name, email, subscription)
+    name = view.get_input("Please enter your name")
+    email = view.get_input("Please enter your email adress")
+    subscription = view.get_input("Are you subscibed? 1 : yes, 0 :  no")
+    crm.new_customer(name, email, subscription)
 
 
 def update_customer():
-    view.print_error_message("Not implemented yet.")
+    id = view.get_input("Please enter your id")
+    name = view.get_input("Please enter your new name")
+    email = view.get_input("Please enter your new email adress")
+    subscription = view.get_input("Are you subscibed? 1 : yes, 0 :  no")
+    is_updated = crm.change_customer_data(id, name, email, subscription)
+    if is_updated is False:
+        view.print_error_message("ID not found")
 
 
 def delete_customer():
-    view.print_error_message("Not implemented yet.")
+    id = view.get_input("Please enter the id for deletion")
+    is_deleted = crm.change_customer_data(id)
+    if is_deleted is True:
+        view.print_error_message("ID not found")
 
 
 def get_subscribed_emails():
-    view.print_error_message("Not implemented yet.")
+    crm.subscribed_customers()
 
 
 def run_operation(option):
