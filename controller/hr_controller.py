@@ -20,6 +20,7 @@ def update_employee():
     ask = view.get_input("What info needs to be updated? (1,2,3,4,5): ")
     new_info = view.get_input("Type in new info: ")
     hr.update_employee(employee_id, ask, new_info)
+    view.print_message(f"{employee_id} employee data updated!")
 
 
 def delete_employee():
