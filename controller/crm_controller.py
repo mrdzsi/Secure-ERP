@@ -3,11 +3,14 @@ from view import terminal as view
 
 
 def list_customers():
-    view.print_error_message("Not implemented yet.")
+    view.print_table(crm.list_of_customers())
 
 
 def add_customer():
-    view.print_error_message("Not implemented yet.")
+     name = view.get_input("Please enter your name")
+     email = view.get_input("Please enter your email adress")
+     subscription = view.get_input("Are you subscibed? 1 : yes, 0 :  no")
+     crm.new_customer(name, email, subscription)
 
 
 def update_customer():
