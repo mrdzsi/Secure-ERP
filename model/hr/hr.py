@@ -18,9 +18,9 @@ DATAFILE = "model/hr/hr.csv"
 HEADERS = ["Id", "Name", "Date of birth", "Department", "Clearance"]
 
 
-def get_table():
-    table = data_manager.read_table_from_file(DATAFILE)
-    return table
+def list_employees():
+    employees = data_manager.read_table_from_file(DATAFILE)
+    return employees
 
 
 def delete_employee(employee_id):
@@ -49,10 +49,17 @@ def update_employee(employee_id, ask, new_info):
     data_manager.write_table_to_file(DATAFILE, table)
 
 
-def add_employee(id, name, bday, department, security_lvl):
-    table = get_table()
-    table.append[id, name, bday, department, security_lvl]
-    data_manager.write_table_to_file(DATAFILE, table)
+# def add_employee(id, name, bday, department, security_lvl):
+#     table = get_table()
+#     table.append[id, name, bday, department, security_lvl]
+#     data_manager.write_table_to_file(DATAFILE, table)
+
+def new_employee(name, bday, department, security_lvl):
+    id = util.generate_id()
+    data = [id, name, bday, department, security_lvl]
+    employees = data_manager.read_table_from_file(DATAFILE, ';')
+    employees.append(data)
+    data_manager.write_table_to_file(DATAFILE, employees, ';')
 
 
 def get_oldest_youngest():

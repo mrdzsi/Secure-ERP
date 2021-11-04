@@ -3,17 +3,16 @@ from view import terminal as view
 
 
 def list_employees():
-    table = hr.get_table()
-    print(table)
+    table = hr.list_employees()
+    view.print_table(table)
 
 
 def add_employee():
-    id = view.get_input("id: ")
     name = view.get_input("name: ")
     bday = view.get_input("birthday (YYYY-MM-DD): ")
     department = view.get_input("department: ")
     security_lvl = view.get_input("security clearance level: ")
-    hr.add_employee(id, name, bday, department, security_lvl)
+    hr.new_employee(name, bday, department, security_lvl)
 
 
 def update_employee():
