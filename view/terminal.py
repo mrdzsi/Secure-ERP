@@ -38,7 +38,7 @@ def print_general_results(result, label):
     elif type(result) == list or tuple:
         print(f"{label}:\n{'; '.join(result)}")
     elif type(result) == dict:
-        result="; ".join(f"{key}: {value}" for key,value in result.items())
+        result ="; ".join(f"{key}: {value}" for key,value in result.items())
         print(f"{label}:\n{result}")
 
 
