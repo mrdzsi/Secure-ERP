@@ -8,21 +8,21 @@ def list_employees():
 
 
 def add_employee():
-    id = view.get_input("id")
-    name = view.get_input("name")
-    bday = view.get_input("birthday")
-    department = view.get_input("department")
-    security_lvl = view.get_input("security clearance level")
+    id = view.get_input("id: ")
+    name = view.get_input("name: ")
+    bday = view.get_input("birthday (YYYY-MM-DD): ")
+    department = view.get_input("department: ")
+    security_lvl = view.get_input("security clearance level: ")
 
 
 def update_employee():
-    employee_id = view.get_input("which employee to update?: ")
+    employee_id = view.get_input("Which employee to update?: ")
     ask = view.get_input("What info needs to be updated? (1,2,3,4,5): ")
     new_info = view.get_input("Type in new info: ")
 
 
 def delete_employee():
-    employee_id = view.get_input("which employee to delete?: ")
+    employee_id = view.get_input("Which employee to delete? (id): ")
     hr.delete_employee(employee_id)
 
 
