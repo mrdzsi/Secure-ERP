@@ -61,11 +61,12 @@ def print_table(table):
     for row in table:
         longest_elem = max(row)
     column_width = len(longest_elem)
+
     first_line = "/"+("-"*column_width*column_numbers)+"\\"
     print(first_line)
     for row in table:
-        line = "|" + "|".join(str(item).center(column_width)) for item in row) + "|"
-        fill = "|" + "|".join(str("-"*column_width)) for item in row) + "|"
+        line = "|" + "|".join(item.center(column_width) for item in row) + "|"
+        fill = "|" + "|".join(("-"*column_width) for _ in row) + "|"
         print(line)
         print(fill)
     last_line = "\\" + ("-"*column_width*column_numbers) + "/"
