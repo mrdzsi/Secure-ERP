@@ -18,29 +18,21 @@ DATAFILE = "model/hr/hr.csv"
 HEADERS = ["Id", "Name", "Date of birth", "Department", "Clearance"]
 
 
-def list_employees():
-    employees = data_manager.read_table_from_file(DATAFILE)
+def list_employees(file=DATAFILE):
+    employees = data_manager.read_table_from_file(file)
     return employees
 
 
-def new_employee(name, bday, department, security_lvl):
+def new_employee(name, bday, department, security_lvl, file=DATAFILE):
     id = util.generate_id()
     data = [id, name, bday, department, security_lvl]
-    employees = data_manager.read_table_from_file(DATAFILE, ';')
+    employees = data_manager.read_table_from_file(file, ';')
     employees.append(data)
-    data_manager.write_table_to_file(DATAFILE, employees, ';')
+    data_manager.write_table_to_file(file, employees, ';')
 
 
-def delete_employee(employee_id):
-    table = get_table()
-    for row in table:
-        if employee_id == str(row[0]):
-            remove(row)
-    data_manager.write_table_to_file(DATAFILE, table)
-
-
-def update_employee(employee_id, ask, new_info):
-    table = get_table()
+def update_employee(employee_id, ask, new_info, file=DATAFILE):
+    table = data_manager.read_table_from_file(file)
     for row in table:
         if employee_id == str(row[0]):
             # ask = input("What info needs to be updated? (1,2,3,4,5)")  # id, name, bday, department, security
@@ -54,7 +46,15 @@ def update_employee(employee_id, ask, new_info):
                 row[3] = new_info
             if ask == "5":
                 row[4] = int(new_info)
-    data_manager.write_table_to_file(DATAFILE, table)
+    data_manager.write_table_to_file(file, table)
+
+
+def delete_employee(employee_id, file=DATAFILE):
+    table = data_manager.read_table_from_file(file)
+    for row in table:
+        if employee_id == str(row[0]):
+            remove(row)
+    data_manager.write_table_to_file(file, table)
 
 
 # def add_employee(id, name, bday, department, security_lvl):
@@ -63,9 +63,8 @@ def update_employee(employee_id, ask, new_info):
 #     data_manager.write_table_to_file(DATAFILE, table)
 
 
-
-def get_oldest_youngest():
-    table = get_table()
+def get_oldest_youngest(file=DATAFILE):
+    table = data_manager.read_table_from_file(file)
     youngest = 0
     youngest_month = 0
     youngest_day = 0
@@ -107,8 +106,8 @@ def get_oldest_youngest():
     return oldest, youngest, oldest_name, youngest_name
 
 
-def get_average_age():
-    table = get_table()
+def get_average_age(file=DATAFILE):
+    table = data_manager.read_table_from_file(file)
     today = datetime.date.today
     list_of_ages = []
     for row in table:
@@ -129,8 +128,8 @@ def get_average_age():
     return average
 
 
-def next_birthday_calc(current_date):
-    table = get_table()
+def next_birthday_calc(current_date, file=DATAFILE):
+    table = data_manager.read_table_from_file(file)
     today = datetime.date.today
     has_bday = []
     for row in table:
@@ -155,8 +154,8 @@ def next_birthday_calc(current_date):
     return has_bday
 
 
-def have_clearance(clearance_lvl):
-    table = get_table()
+def have_clearance(clearance_lvl, file=DATAFILE):
+    table = data_manager.read_table_from_file(file)
     have_clearance = []
     for row in table:
         if int(row[4]) >= int(clearance_lvl):
@@ -164,8 +163,8 @@ def have_clearance(clearance_lvl):
     return have_clearance
 
 
-def employees_per_department():
-    table = get_table()
+def employees_per_department(file=DATAFILE):
+    table = data_manager.read_table_from_file(file)
     departments = {}
     for row in table:
         if row[3] not in departments.keys():
