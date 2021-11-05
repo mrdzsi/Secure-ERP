@@ -37,8 +37,8 @@ def print_general_results(result, label):
     #     print(f"{label}: {round(result, 2)}")
     if type(result) == list or tuple:
         print(f"{label}:\n{'; '.join(result)}")
-    elif type(result) == dict:
-        result="; ".join(f"{key}: {value}" for key,value in result.items())
+    if type(result) == dict:
+        result = "; ".join(f"{key}: {value}" for key, value in result.items())
         print(f"{label}:\n{result}")
 
 

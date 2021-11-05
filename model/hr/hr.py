@@ -57,8 +57,6 @@ def delete_employee(employee_id, file=DATAFILE):
     data_manager.write_table_to_file(file, table)
 
 
-
-
 # def add_employee(id, name, bday, department, security_lvl):
 #     table = get_table()
 #     table.append[id, name, bday, department, security_lvl]
@@ -167,7 +165,7 @@ def have_clearance(clearance_lvl, file=DATAFILE):
 
 def employees_per_department(file=DATAFILE):
     table = data_manager.read_table_from_file(file)
-    departments = {}
+    departments = dict()
     for row in table:
         if row[3] not in departments.keys():
             departments.update({f'{row[3]}': 1})
