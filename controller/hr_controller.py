@@ -53,7 +53,7 @@ def count_employees_with_clearance():
 
 def count_employees_per_department():
     department_count = hr.employees_per_department()
-    view.print_general_results(department_count, "Number of employees per department")  # ez is lehet nem message hanem table lesz, teszt kedvéért maradhat message egyenlőre
+    view.print_message(f"Number of employees per department: {department_count}")  # ez is lehet nem message hanem table lesz, teszt kedvéért maradhat message egyenlőre
 
 
 def run_operation(option):
@@ -100,7 +100,7 @@ def menu():
     while operation != '0':
         display_menu()
         try:
-            operation = view.get_input("Select an operation")
+            operation = view.get_input("Select an operation: ")
             run_operation(int(operation))
         except KeyError as err:
             view.print_error_message(err)

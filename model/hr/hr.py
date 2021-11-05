@@ -34,7 +34,7 @@ def new_employee(name, bday, department, security_lvl, file=DATAFILE):
 def update_employee(employee_id, ask, new_info, file=DATAFILE):
     table = data_manager.read_table_from_file(file)
     for row in table:
-        if employee_id == row[0]:
+        if employee_id == str(row[0]):
             # ask = input("What info needs to be updated? (1,2,3,4,5)")  # id, name, bday, department, security
             if ask == "1":
                 row[0] = new_info
@@ -45,7 +45,7 @@ def update_employee(employee_id, ask, new_info, file=DATAFILE):
             if ask == "4":
                 row[3] = new_info
             if ask == "5":
-                row[4] = new_info
+                row[4] = int(new_info)
     data_manager.write_table_to_file(file, table)
 
 
@@ -53,7 +53,7 @@ def delete_employee(employee_id, file=DATAFILE):
     table = data_manager.read_table_from_file(file)
     for row in table:
         if employee_id == str(row[0]):
-            remove(row)
+            table.remove(row)
     data_manager.write_table_to_file(file, table)
 
 
